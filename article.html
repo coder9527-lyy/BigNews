@@ -205,10 +205,63 @@
         <p>电话：0755-****888 粤ICP备*******8号</p>
     </div>
 
+    <!-- 文章类型的模板引擎 -->
+    <script id="categoryTemp" type="text/html">
+        <li class="up"></li>
+        {{each data}}
+        <li><a href="./list.html?id={{$value.id}}">{{$value.name}}</a></li>
+        {{/each}}
+    </script>
+
+    <script id="rankTemp" type="text/html">
+        {{each data}}
+        {{if $index == 0}}
+        <li><span class="first">{{$index+1}}</span><a href="./article.html?id={{$value.id}}">{{$value.title}}</a></li>
+        {{else if $index == 1}}
+        <li><span class="second">{{$index+1}}</span><a href="./article.html?id={{$value.id}}">{{$value.title}}</a></li>
+        {{else if $index == 2}}
+        <li><span class="third">{{$index+1}}</span><a href="./article.html?id={{$value.id}}">{{$value.title}}</a></li>
+        {{else}}
+        <li><span>{{$index+1}}</span><a href="./article.html?id={{$value.id}}">{{$value.title}}</a></li>
+        {{/if}}
+        {{/each}}
+    </script>
+
+    <script id="latestCommentTemp" type="text/html">
+        {{each data}}
+        <li>
+            <span>{{$value.author.substr(0,1)}}</span>
+            <b><em>{{$value.author}}</em> {{$value.date}} {{$value.time}} 说:</b>
+            <strong>{{$value.intro}}</strong>
+        </li>
+        {{/each}}
+    </script>
+
+    <script id="attentionTemp" type="text/html">
+        {{each data}}
+        <li><a href="javascript:void(0)">{{$value.intro}}</a></li>
+        {{/each}}
+    </script>
+
+    <script id="commentDetailTemp" type="text/html">
+        {{each data}}
+        <div class="comment_detail_list">
+            <div class="person_pic fl">{{$value.author.substr(0,1)}}</div>
+            <div class="name_time fl"><b>{{$value.author}}</b><span>{{$value.date}}</span></div>
+            <div class="comment_text fl">{{$value.content}}</div>
+        </div>
+        {{/each}}
+    </script>
+
     <!-- 引入模板引擎js文件 -->
     <script src="./js/template-web.js"></script>
     <script src="./js/jquery-1.12.4.min.js"></script>
-
+    <!-- http.js -->
+    <script src="./js/http.js"></script>
+    <!-- index.js -->
+    <script src="./js/index.js"></script>
+    <!-- article -->
+    <script src="./js/article.js"></script>
 </body>
 
 </html>
