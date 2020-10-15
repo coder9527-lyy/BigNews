@@ -11,8 +11,37 @@
     <link rel="stylesheet" href="./css/iconfont.css">
     <link rel="stylesheet" href="./css/main.css">
     <script src="./libs/jquery-1.12.4.min.js"></script>
+    <script src="./libs/bootstrap/js/bootstrap.min.js"></script>
     <!-- 引入模板引擎js文件 -->
     <script src="./libs/template-web.js"></script>
+    <!-- 引入分页器js文件 -->
+    <script src="./libs/jquery.twbsPagination.js"></script>
+    <!-- 引入http.js -->
+    <script src="./libs/http.js"></script>
+    <script id="categoryTemp" type="text/html">
+        <option value="">所有分类</option>
+        {{each data}}
+        <option value="{{$value.id}}">{{$value.name}}</option>
+        {{/each}}
+    </script>
+    <script id="listTemp" type="text/html">
+        {{each data.data}}
+        <tr>
+            <td>{{$value.title}}</td>
+            <td>{{$value.author}}</td>
+            <td>{{$value.category}}</td>
+            <td class="text-center">{{$value.date}}</td>
+            <td class="text-center">{{$value.state}}</td>
+            <td class="text-center">
+                <a href="./article_edit.html?id={{$value.id}}" class="btn btn-default btn-xs"
+                    data-id="{{$value.id}}">编辑</a>
+                <a href="javascript:void(0);" class="btn btn-danger btn-xs delete" data-id="{{$value.id}}">删除</a>
+            </td>
+        </tr>
+        {{/each}}
+    </script>
+    <!-- index.js -->
+    <script src="./js/article_list.js"></script>
 </head>
 
 <body>
@@ -62,13 +91,56 @@
                         <td class="text-center">2017-06-08 07:08:46</td>
                         <td class="text-center">已发布</td>
                         <td class="text-center">
-                            <a href="article_edit.html" class="btn btn-default btn-xs">编辑</a>
+                            <a href="article_edit.html" class="btn btn-default btn-xs update">编辑</a>
                             <a href="javascript:void(0);" class="btn btn-danger btn-xs delete">删除</a>
                         </td>
                     </tr>
                 </tbody>
             </table>
             <div class="row text-center">
+                <!-- 分页 -->
+                <ul id="pagination" class="pagination-sm"></ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- BS 插件模态框结构 Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- data-dismiss="modal" 用于模态框的 -->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">温馨提示</h4>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <!-- data-dismiss="modal" 用于模态框的 -->
+                    <button type="button" class="btn btn-success" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- BS 插件模态框结构 Modal 删除模块 -->
+    <div class="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- data-dismiss="modal" 用于模态框的 -->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">删除文章</h4>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-success" id="modalSubmit">确定 </button>
+                </div>
             </div>
         </div>
     </div>

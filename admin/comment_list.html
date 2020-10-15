@@ -11,7 +11,37 @@
   <link rel="stylesheet" href="css/iconfont.css">
   <link rel="stylesheet" href="css/main.css">
   <script src="./libs/jquery-1.12.4.min.js"></script>
+  <script src="./libs/bootstrap/js/bootstrap.min.js"></script>
   <script src="./libs/template-web.js"></script>
+  <!-- 引入分页器js文件 -->
+  <script src="./libs/jquery.twbsPagination.js"></script>
+  <!-- 引入http.js -->
+  <script src="./libs/http.js"></script>
+  <script id="listTemp" type="text/html">
+    {{each data}}
+    {{if $value.state == '待审核'}}
+    <tr class="danger">
+      {{else}}
+    <tr>
+      {{/if}}
+      <td>{{$value.author}}</td>
+      <td>{{$value.content}}</td>
+      <td>{{$value.title}}</td>
+      <td>{{$value.date}}</td>
+      <td>{{$value.state}}</td>
+      <td class="text-center">
+        {{if $value.state == '待审核'}}
+        <a href="javascript:void(0)" class="btn btn-info btn-xs pass" data-id="{{$value.id}}">通过</a>
+        {{else if $value.state == '已通过'}}
+        <a href="javascript:void(0)" class="btn btn-warning btn-xs reject" data-id="{{$value.id}}">拒绝</a>
+        {{/if}}
+        <a href="javascript:void(0)" class="btn btn-danger btn-xs delete" data-id="{{$value.id}}">删除</a>
+      </td>
+    </tr>
+    {{/each}}
+  </script>
+  <!-- comment_list.js -->
+  <script src="./js/comment_list.js"></script>
 </head>
 
 <body>
@@ -142,7 +172,7 @@
         </tbody>
       </table>
       <div class="row text-center">
-        <ul class="pagination pagination-sm">
+        <!-- <ul class="pagination pagination-sm">
           <li class="page-item first disabled"><a href="#" class="page-link">首页</a></li>
           <li class="page-item prev disabled"><a href="#" class="page-link">上一页</a></li>
           <li class="page-item active"><a href="#" class="page-link">1</a></li>
@@ -154,10 +184,53 @@
           <li class="page-item"><a href="#" class="page-link">7</a></li>
           <li class="page-item next"><a href="#" class="page-link">下一页</a></li>
           <li class="page-item last"><a href="#" class="page-link">尾页</a></li>
-        </ul>
+        </ul> -->
         <ul id="pagination" class="pagination-sm"></ul>
       </div>
 
+    </div>
+  </div>
+
+  <!-- BS 插件模态框结构 Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <!-- data-dismiss="modal" 用于模态框的 -->
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+              aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">温馨提示</h4>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <!-- data-dismiss="modal" 用于模态框的 -->
+          <button type="button" class="btn btn-success" data-dismiss="modal">关闭</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BS 插件模态框结构 Modal -->
+  <div class="modal fade" id="toggleModal" tabindex="-1" role="dialog" aria-labelledby="toggleModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <!-- data-dismiss="modal" 用于模态框的 -->
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+              aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="toggleModalLabel">更改状态</h4>
+        </div>
+        <input type="hidden" name="id">
+        <input type="hidden" name="type">
+        <div class="modal-body">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+          <button type="button" class="btn btn-success" id="modalSubmit">确定 </button>
+        </div>
+      </div>
     </div>
   </div>
 </body>

@@ -14,6 +14,22 @@
     <script src="./libs/bootstrap/js/bootstrap.min.js"></script>
     <!-- 引入模板引擎js文件 -->
     <script src="./libs/template-web.js"></script>
+    <!-- 引入login.js -->
+    <script src="./libs/http.js"></script>
+    <script id="myTemp" type="text/html">
+        {{each data}}
+        <tr>
+            <td>{{$value.name}}</td>
+            <td>{{$value.slug}}</td>
+            <td class="text-center">
+                <a href="javascript:void(0);" data-id="{{$value.id}}" class=" btn btn-info btn-xs btn-update">编辑</a>
+                <a href="javascript:void(0);" data-id="{{$value.id}}" class="btn btn-danger btn-xs btn-delete">删除</a>
+            </td>
+        </tr>
+        {{/each}}
+    </script>
+    <!-- article_category.js -->
+    <script src="./js/article_category.js"></script>
 </head>
 
 <body>
@@ -35,7 +51,7 @@
                         <td>奇趣事</td>
                         <td>funny</td>
                         <td class="text-center">
-                            <a href="javascript:void(0);" data-toggle="modal" class=" btn btn-info btn-xs">编辑</a>
+                            <a href="javascript:void(0);" data-toggle="modal" class=" btn btn-info btn-xs ">编辑</a>
                             <a href="javascript:void(0);" class="btn btn-danger btn-xs">删除</a>
                         </td>
                     </tr>
@@ -43,13 +59,66 @@
                 <tfoot>
                     <tr>
                         <td colspan="3" class="text-center">
-                            <a href="javascript:void(0)" class="btn btn-success" id="xinzengfenlei" data-toggle="modal"
-                                data-target="#myModal">新增分类</a>
+                            <a href="javascript:void(0)" class="btn btn-success" id="xinzengfenlei">新增分类</a>
                         </td>
                     </tr>
                 </tfoot>
             </table>
         </div>
     </div>
+
+    <!-- BS 插件模态框结构 Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- data-dismiss="modal" 用于模态框的 -->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">温馨提示</h4>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <!-- data-dismiss="modal" 用于模态框的 -->
+                    <button type="button" class="btn btn-success" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- id="changeModal" 记得修改模态框的默认 id -->
+    <div class="modal fade" id="changeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="exampleModalLabel">分类管理</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="recipient-name" class="control-label">分类名称:</label>
+                            <input type="text" class="form-control" id="recipient-name">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="control-label">分类说明:</label>
+                            <textarea class="form-control" id="message-text"></textarea>
+                        </div>
+                    </form>
+                    <input type="hidden" id="categoryType">
+                    <input type="hidden" id="categoryId">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-success" id="modalSubmit">确定 </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
 
 </html>

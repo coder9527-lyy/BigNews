@@ -12,8 +12,24 @@
     <link rel="stylesheet" href="css/main.css">
     <!-- jq -->
     <script src="./libs/jquery-1.12.4.min.js"></script>
+    <script src="./libs/bootstrap/js/bootstrap.min.js"></script>
     <!-- 模板引擎 -->
     <script src="./libs/template-web.js"></script>
+    <!-- http.js -->
+    <script src="./libs/http.js"></script>
+    <script id="categoryTemp" type="text/html">
+        {{each data}}
+        <option value="{{$value.id}}">{{$value.name}}</option>
+        {{/each}}
+    </script>
+    <!-- article_eddit.js -->
+    <script src="./js/article_edit.js"></script>
+    <!-- jedate插件tinymce富文本编辑器插件和的文件 -->
+    <link rel="stylesheet" href="./libs/jedate/css/jeDate-test.css">
+    <link rel="stylesheet" href="./libs/jedate/css/jedate.css">
+    <script src="./libs/jedate/js/jedate.js"></script>
+    <script src="./libs/tinymce/tinymce.min.js"></script>
+    <script src="./js/config.js"></script>
 </head>
 
 <body>
@@ -50,12 +66,15 @@
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">发布时间：</label>
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
+                        <input class="form-control" name="date" id="ymd" type="text" placeholder="YYYY-MM-DD" readonly
+                            style="width: 234px;">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">文章内容：</label>
                     <div class="col-sm-10">
+                        <textarea id="mytextarea">Hello, World!</textarea>
                     </div>
                 </div>
                 <div class="form-group">
@@ -65,6 +84,26 @@
                     </div>
                 </div>
             </form>
+        </div>
+    </div>
+    <!-- BS 插件模态框结构 Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- data-dismiss="modal" 用于模态框的 -->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">温馨提示</h4>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <!-- data-dismiss="modal" 用于模态框的 -->
+                    <button type="button" class="btn btn-success" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
         </div>
     </div>
 </body>

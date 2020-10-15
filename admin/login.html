@@ -15,6 +15,10 @@
   <script src="./libs/jquery-1.12.4.min.js"></script>
   <!-- 引入bootstrap的js文件 -->
   <script src="./libs/bootstrap/js/bootstrap.min.js"></script>
+  <!-- 引入login.js -->
+  <script src="./libs/http.js"></script>
+  <!-- 引入login.js -->
+  <script src="./js/login.js"></script>
 </head>
 
 <body>
@@ -35,6 +39,27 @@
         <input type="password" class="input_pass" placeholder="密码" />
         <input type="submit" class="input_sub" value="登 录" />
       </form>
+    </div>
+  </div>
+
+  <!-- BS 插件模态框结构 Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <!-- data-dismiss="modal" 用于模态框的 -->
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+              aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">温馨提示</h4>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <!-- data-dismiss="modal" 用于模态框的 -->
+          <button type="button" class="btn btn-success" data-dismiss="modal">关闭</button>
+        </div>
+      </div>
     </div>
   </div>
 
